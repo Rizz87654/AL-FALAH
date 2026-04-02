@@ -8,6 +8,7 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: #333;
+    overflow-x: hidden;
 }
 
 .container {
@@ -18,7 +19,7 @@ body {
 
 /* Navigation */
 nav {
-    background: #fff;
+    background: #ffffff;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     position: fixed;
     width: 100%;
@@ -42,6 +43,7 @@ nav .container {
 .logo img {
     width: 50px;
     height: 50px;
+    object-fit: contain;
 }
 
 .logo h2 {
@@ -53,6 +55,10 @@ nav .container {
     display: flex;
     list-style: none;
     gap: 30px;
+}
+
+.nav-links li {
+    list-style: none;
 }
 
 .nav-links a {
@@ -71,6 +77,7 @@ nav .container {
     display: none;
     font-size: 24px;
     cursor: pointer;
+    color: #2c3e50;
 }
 
 /* Hero Section */
@@ -79,6 +86,7 @@ nav .container {
     color: white;
     padding: 150px 0 100px;
     text-align: center;
+    margin-top: 0;
 }
 
 .hero-content h1 {
@@ -104,10 +112,13 @@ nav .container {
     text-decoration: none;
     font-weight: 600;
     transition: transform 0.3s;
+    border: none;
+    cursor: pointer;
 }
 
 .btn:hover {
     transform: translateY(-3px);
+    background: #ffed4a;
 }
 
 /* Welcome Section */
@@ -126,10 +137,12 @@ nav .container {
 .welcome-text h2 {
     color: #2c3e50;
     margin-bottom: 20px;
+    font-size: 2rem;
 }
 
 .welcome-text p {
     margin-bottom: 15px;
+    text-align: justify;
 }
 
 .welcome-text h4 {
@@ -168,15 +181,21 @@ nav .container {
     margin-bottom: 10px;
 }
 
+.stat-box p {
+    font-size: 1rem;
+}
+
 /* Program Section */
 .program {
     padding: 80px 0;
+    background: #fff;
 }
 
 .program h2 {
     text-align: center;
     color: #2c3e50;
     margin-bottom: 50px;
+    font-size: 2rem;
 }
 
 .program-grid {
@@ -204,17 +223,39 @@ nav .container {
     margin-bottom: 15px;
 }
 
+.program-card h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
 /* Page Header */
 .page-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 100px 0 60px;
+    padding: 120px 0 60px;
     text-align: center;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
 }
 
 /* Sejarah & Visi Misi */
 .sejarah {
     padding: 60px 0;
+    background: #fff;
+}
+
+.sejarah h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.sejarah p {
+    margin-bottom: 15px;
+    text-align: justify;
 }
 
 .visi-misi {
@@ -235,6 +276,11 @@ nav .container {
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+.visi h2, .misi h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
 .visi h2 i, .misi h2 i {
     color: #3498db;
     margin-right: 10px;
@@ -247,7 +293,7 @@ nav .container {
 
 .misi li {
     margin-bottom: 10px;
-    padding-left: 20px;
+    padding-left: 25px;
     position: relative;
 }
 
@@ -256,16 +302,20 @@ nav .container {
     color: #3498db;
     position: absolute;
     left: 0;
+    font-weight: bold;
 }
 
 /* Fasilitas */
 .fasilitas {
     padding: 60px 0;
+    background: #fff;
 }
 
 .fasilitas h2 {
     text-align: center;
     margin-bottom: 50px;
+    font-size: 2rem;
+    color: #2c3e50;
 }
 
 .fasilitas-grid {
@@ -279,6 +329,11 @@ nav .container {
     padding: 30px;
     background: #f9f9f9;
     border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.fasilitas-item:hover {
+    transform: translateY(-5px);
 }
 
 .fasilitas-item i {
@@ -287,12 +342,21 @@ nav .container {
     margin-bottom: 15px;
 }
 
+.fasilitas-item h3 {
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
 /* Berita */
+.berita-list {
+    padding: 60px 0;
+    background: #f9f9f9;
+}
+
 .berita-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
-    padding: 60px 0;
 }
 
 .berita-card {
@@ -300,6 +364,11 @@ nav .container {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.berita-card:hover {
+    transform: translateY(-5px);
 }
 
 .berita-card img {
@@ -320,14 +389,23 @@ nav .container {
 
 .berita-card h3 {
     margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.berita-card p {
+    color: #666;
 }
 
 /* Galeri */
+.galeri {
+    padding: 60px 0;
+    background: #fff;
+}
+
 .galeri-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    padding: 60px 0;
 }
 
 .galeri-item {
@@ -335,6 +413,7 @@ nav .container {
     overflow: hidden;
     border-radius: 10px;
     cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .galeri-item img {
@@ -351,6 +430,7 @@ nav .container {
 /* Kontak */
 .kontak {
     padding: 60px 0;
+    background: #f9f9f9;
 }
 
 .kontak-wrapper {
@@ -361,26 +441,49 @@ nav .container {
 }
 
 .kontak-info {
-    background: #f9f9f9;
+    background: white;
     padding: 30px;
     border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.kontak-info h2 {
+    margin-bottom: 25px;
+    color: #2c3e50;
 }
 
 .info-item {
     display: flex;
     gap: 20px;
     margin-bottom: 25px;
+    align-items: flex-start;
 }
 
 .info-item i {
     font-size: 1.5rem;
     color: #3498db;
+    margin-top: 5px;
+}
+
+.info-item h3 {
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+.info-item p {
+    color: #666;
 }
 
 .kontak-form {
-    background: #f9f9f9;
+    background: white;
     padding: 30px;
     border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.kontak-form h2 {
+    margin-bottom: 25px;
+    color: #2c3e50;
 }
 
 .kontak-form input,
@@ -391,6 +494,13 @@ nav .container {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-family: inherit;
+    font-size: 1rem;
+}
+
+.kontak-form input:focus,
+.kontak-form textarea:focus {
+    outline: none;
+    border-color: #3498db;
 }
 
 .form-note {
@@ -402,6 +512,15 @@ nav .container {
 
 .map {
     margin-top: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.map h2 {
+    margin-bottom: 20px;
+    color: #2c3e50;
 }
 
 .map iframe {
@@ -424,6 +543,12 @@ footer {
 
 .footer-section h3 {
     margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.footer-section p {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
 }
 
 .social-links {
@@ -466,7 +591,26 @@ footer {
     border-top: 1px solid #34495e;
 }
 
-/* Responsive */
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .welcome .container,
+    .visi-misi .container,
+    .kontak-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .program h2,
+    .fasilitas h2,
+    .page-header h1 {
+        font-size: 1.8rem;
+    }
+}
+
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
@@ -489,13 +633,62 @@ footer {
         display: flex;
     }
     
-    .welcome .container,
-    .visi-misi .container,
-    .kontak-wrapper {
-        grid-template-columns: 1fr;
+    .nav-links li {
+        margin: 10px 0;
+    }
+    
+    .hero {
+        padding: 120px 0 80px;
     }
     
     .hero-content h1 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .stat-box h3 {
+        font-size: 1.5rem;
+    }
+    
+    .program-grid,
+    .fasilitas-grid,
+    .berita-grid,
+    .galeri-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .program-card,
+    .fasilitas-item,
+    .berita-card {
+        margin: 0 10px;
     }
 }
