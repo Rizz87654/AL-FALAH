@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Login - Al Falah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1b5e20, #2e7d32, #f9a825);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path fill="white" d="M20,20 L30,20 L25,30 Z M70,70 L80,70 L75,80 Z M40,80 L50,80 L45,90 Z"/><circle cx="50" cy="50" r="10"/></svg>');
+            background-size: 40px;
+            pointer-events: none;
+        }
+
+        .container {
+            background: rgba(255,255,255,0.98);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 520px;
+            padding: 40px;
+            animation: slideUp 0.5s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo h2 {
+            color: #2e7d32;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .logo span {
+            color: #f9a825;
+        }
+
+        .logo p {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            background: #f0f2f5;
+            padding: 5px;
+            border-radius: 50px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-container {
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #333;
+            font-size: 0.8rem;
+        }
+
+        label i {
+            color: #f9a825;
+            margin-right: 5px;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 15px 12px 42px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #f9a825;
+            box-shadow: 0 0 0 3px rgba(249,168,37,0.1);
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 25px;
+            padding: 8px 0 8px 42px;
+        }
+
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: normal;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .radio-group input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            padding: 0;
+            margin: 0;
+            accent-color: #2e7d32;
+        }
+
+        .btn-login, .btn-register {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            font-family: inherit;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+            color: white;
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #f9a825, #ef6c00);
+            color: white;
+        }
+
+        .btn-login:hover, .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            display: none;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .info-text {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.7rem;
+            color: #999;
+        }
+
+        .info-text i {
+            color: #f9a825;
+        }
+
+        @media (max-width: 500px) {
+            .container { padding: 25px; }
+            .radio-group { gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h2>Al<span>Falah</span></h2>
+            <p>Sekolah Islam Terpadu</p>
+        </div>
+
+        <div class="tab-buttons">
+            <button class="tab-btn active" data-tab="login">🔐 Login</button>
+            <button class="tab-btn" data-tab="register">📝 Daftar Murid</button>
+        </div>
+
+        <div id="errorMessage" class="message error-message"></div>
+        <div id="successMessage" class="message success-message"></div>
+
+        <!-- FORM LOGIN -->
+        <div id="loginForm" class="form-container active">
+            <form id="formLogin">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Username / Nama</label>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="loginUsername" placeholder="Masukkan username atau nama" autocomplete="off">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Masukkan password">
+                    </div>
+                </div>
+                <button type="submit" class="btn-login"><i class="fas fa-sign-in-alt"></i> Login</button>
+            </form>
+            <div class="info-text">
+                <i class="fas fa-shield-alt"></i> Admin: username "admin" password "admin123"
+            </div>
+        </div>
+
+        <!-- FORM REGISTRASI MURID -->
+        <div id="registerForm" class="form-container">
+            <form id="formRegister">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Nama Lengkap</label>
+                    <div class="input-group">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="regNama" placeholder="Contoh: Ahmad Fathirullah">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-lock"></i> Password</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="regPassword" placeholder="Buat password (min 4 karakter)">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-chalkboard-user"></i> Kelas</label>
+                    <div class="input-group">
+                        <i class="fas fa-school"></i>
+                        <select id="regKelas">
+                            <option value="" disabled selected>Pilih Kelas</option>
+                            <option value="1A">Kelas 1A</option><option value="1B">Kelas 1B</option>
+                            <option value="2A">Kelas 2A</option><option value="2B">Kelas 2B</option>
+                            <option value="3A">Kelas 3A</option><option value="3B">Kelas 3B</option>
+                            <option value="4A">Kelas 4A</option><option value="4B">Kelas 4B</option>
+                            <option value="5A">Kelas 5A</option><option value="5B">Kelas 5B</option>
+                            <option value="6A">Kelas 6A</option><option value="6B">Kelas 6B</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Umur</label>
+                    <div class="input-group">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="number" id="regUmur" placeholder="Contoh: 12" min="5" max="18">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-venus-mars"></i> Jenis Kelamin</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="regGender" value="Laki-laki"> <i class="fas fa-mars"></i> Laki-laki</label>
+                        <label><input type="radio" name="regGender" value="Perempuan"> <i class="fas fa-venus"></i> Perempuan</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn-register"><i class="fas fa-user-plus"></i> Daftar Sekarang</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // KONFIGURASI
+        const ADMIN_USERNAME = "admin";
+        const ADMIN_PASSWORD = "admin123";
+        const STUDENT_REDIRECT_URL = "https://al-falahcom.vercel.app";
+
+        // DATA STORAGE
+        let students = [];
+        let loginHistory = [];
+
+        // LOAD DATA
+        function loadData() {
+            const savedStudents = localStorage.getItem('alfalah_students_data');
+            const savedHistory = localStorage.getItem('alfalah_login_history');
+            
+            if (savedStudents) students = JSON.parse(savedStudents);
+            else students = [];
+            
+            if (savedHistory) loginHistory = JSON.parse(savedHistory);
+            else loginHistory = [];
+        }
+
+        function saveStudents() {
+            localStorage.setItem('alfalah_students_data', JSON.stringify(students));
+        }
+
+        function saveHistory() {
+            localStorage.setItem('alfalah_login_history', JSON.stringify(loginHistory));
+        }
+
+        // TAMBAH RIWAYAT LOGIN
+        function addLoginHistory(nama, kelas) {
+            const now = new Date();
+            loginHistory.unshift({
+                id: Date.now(),
+                nama: nama,
+                kelas: kelas,
+                waktu: now.toISOString(),
+                tanggal: now.toLocaleDateString('id-ID'),
+                jam: now.toLocaleTimeString('id-ID')
+            });
+            saveHistory();
+        }
+
+        // TAMPILAN PESAN
+        function showError(msg) {
+            const el = document.getElementById('errorMessage');
+            el.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${msg}`;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 3000);
+        }
+
+        function showSuccess(msg) {
+            const el = document.getElementById('successMessage');
+            el.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 3000);
+        }
+
+        function hideMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // TAB SWITCH
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tab = btn.dataset.tab;
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                document.querySelectorAll('.form-container').forEach(c => c.classList.remove('active'));
+                document.getElementById(`${tab}Form`).classList.add('active');
+                hideMessages();
+            });
+        });
+
+        // PROSES LOGIN
+        document.getElementById('formLogin').addEventListener('submit', (e) => {
+            e.preventDefault();
+            hideMessages();
+
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            if (!username || !password) {
+                showError('Username/Nama dan password harus diisi!');
+                return;
+            }
+
+            // LOGIN ADMIN
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                localStorage.setItem('alfalah_logged_in', 'true');
+                localStorage.setItem('alfalah_user_role', 'admin');
+                localStorage.setItem('alfalah_admin_name', username);
+                window.location.href = 'dashboard.html';
+                return;
+            }
+
+            // LOGIN MURID
+            const student = students.find(s => s.nama.toLowerCase() === username.toLowerCase() && s.password === password);
+
+            if (student) {
+                // Tambah riwayat login
+                addLoginHistory(student.nama, student.kelas);
+                
+                // Simpan session murid
+                localStorage.setItem('alfalah_student_logged_in', 'true');
+                localStorage.setItem('alfalah_user_role', 'student');
+                localStorage.setItem('alfalah_student_data', JSON.stringify({
+                    nama: student.nama,
+                    kelas: student.kelas,
+                    gender: student.gender,
+                    umur: student.umur
+                }));
+                
+                // Redirect ke website resmi
+                window.location.href = STUDENT_REDIRECT_URL;
+            } else {
+                showError('Username/Nama atau password salah! Pastikan Anda sudah mendaftar.');
+            }
+        });
+
+        // PROSES REGISTRASI
+        document.getElementById('formRegister').addEventListener('submit', (e) => {
+            e.preventDefault();
+            hideMessages();
+
+            const nama = document.getElementById('regNama').value.trim();
+            const password = document.getElementById('regPassword').value;
+            const kelas = document.getElementById('regKelas').value;
+            const umur = document.getElementById('regUmur').value;
+            const gender = document.querySelector('input[name="regGender"]:checked');
+
+            // Validasi
+            if (!nama) { showError('Nama lengkap harus diisi!'); return; }
+            if (nama.length < 3) { showError('Nama lengkap minimal 3 karakter!'); return; }
+            if (!password) { showError('Password harus diisi!'); return; }
+            if (password.length < 4) { showError('Password minimal 4 karakter!'); return; }
+            if (!kelas) { showError('Silakan pilih kelas!'); return; }
+            if (!umur) { showError('Umur harus diisi!'); return; }
+            if (umur < 5 || umur > 18) { showError('Umur harus antara 5 - 18 tahun!'); return; }
+            if (!gender) { showError('Silakan pilih jenis kelamin!'); return; }
+
+            // Cek nama unik
+            if (students.some(s => s.nama.toLowerCase() === nama.toLowerCase())) {
+                showError('Nama sudah terdaftar! Silakan gunakan nama lain atau login.');
+                return;
+            }
+
+            // Simpan murid baru
+            const newStudent = {
+                id: Date.now(),
+                nama: nama,
+                password: password,
+                kelas: kelas,
+                umur: parseInt(umur),
+                gender: gender.value,
+                registeredAt: new Date().toISOString()
+            };
+
+            students.push(newStudent);
+            saveStudents();
+
+            showSuccess('✅ Pendaftaran berhasil! Silakan login.');
+
+            // Reset form
+            document.getElementById('regNama').value = '';
+            document.getElementById('regPassword').value = '';
+            document.getElementById('regKelas').value = '';
+            document.getElementById('regUmur').value = '';
+            if (gender) gender.checked = false;
+
+            // Pindah ke tab login
+            setTimeout(() => {
+                document.querySelector('.tab-btn[data-tab="login"]').click();
+                document.getElementById('loginUsername').value = nama;
+                document.getElementById('loginPassword').focus();
+            }, 2000);
+        });
+
+        // CEK SESSION YANG SUDAH LOGIN
+        loadData();
+
+        if (localStorage.getItem('alfalah_logged_in') === 'true' && localStorage.getItem('alfalah_user_role') === 'admin') {
+            window.location.href = 'dashboard.html';
+        }
+
+        if (localStorage.getItem('alfalah_student_logged_in') === 'true' && localStorage.getItem('alfalah_user_role') === 'student') {
+            window.location.href = STUDENT_REDIRECT_URL;
+        }
+    </script>
+</body>
+</html>
